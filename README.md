@@ -16,4 +16,4 @@
 * https://moodle.mosbach.dhbw.de/pluginfile.php/493503/mod_assign/introattachment/0/Projektaufgabe%20Taschenrechner.pdf?forcedownload=1
 
 ### Bewertung:
-![Bewertung](/pictures/images1.png?raw = true "Bewertung)
+![Bewertung](../pictures/images1.png?raw = true "Bewertung)
