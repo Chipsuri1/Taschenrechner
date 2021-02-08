@@ -2,7 +2,7 @@
 
 ## Abgabe: 25.02.2021 
 
-## Aufgabenverteilung:
+### Aufgabenverteilung:
 * Scanner: Jan
 * Parser: Niklas
 * Evaluierer: Tobias
