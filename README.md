@@ -15,5 +15,11 @@
 ### Spezifikation:
 * https://moodle.mosbach.dhbw.de/pluginfile.php/493503/mod_assign/introattachment/0/Projektaufgabe%20Taschenrechner.pdf?forcedownload=1
 
-### Bewertung:
+#### 1. Aufgabenbeschreibung:
+![Aufgabenbeschreibung](images/image.png)
+
+#### 2. Bewertung:
 ![Bewertung](images/picture2.png)
+
+#### 3. Abgabeinformationen:
+![Abgabeinformationen](images/picture3.png)
