@@ -1,6 +1,4 @@
-# DHBW 4. Semester | Compilerbau Farid Derradji
-
-## Taschenrechner
+# DHBW 4. Semester | Compilerbau Farid Derradji| Taschenrechner
 
 ## Aufgabenverteilung:
 * Scanner: Jan
