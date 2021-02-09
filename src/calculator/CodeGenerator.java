@@ -17,17 +17,34 @@ public class CodeGenerator implements Visitor {
 
     @Override
     public void visit(IntegerNode node){
+        node.setVariable(getVariableName(0));
+        incrementCounter();
 
-    }
-
-    @Override
-    public void visit(BinOpNode node){
-
+        codeLines.add(node.getVariable() + " = " + node.getValue());
     }
 
     @Override
     public void visit(UnaryOpNode node){
+        node.setVariable(getVariableName(0));
+        incrementCounter();
 
+        codeLines.add(node.getVariable() + " = " + node.getOperator() + getVariableName(1));
+    }
+
+    @Override
+    public void visit(BinOpNode node){
+        node.setVariable(getVariableName(0));
+        incrementCounter();
+
+        codeLines.add(node.getVariable() + " = " + getVariableName(1) + " " + node.getOperator() + " " + getVariableName(2));
+    }
+
+    private String getVariableName(int offSet){
+        return "X" + (counter-offSet);
+    }
+
+    private void incrementCounter(){
+        counter++;
     }
 
     public List<String> getCodeLines() {

@@ -19,4 +19,8 @@ public class BinOpNode extends SyntaxNode implements Visitable {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
+    public String getOperator() {
+        return operator;
+    }
 }
