@@ -1,6 +1,5 @@
 package calculator;
 
-
 import calculator.tokens.EndOfStreamToken;
 import calculator.tokens.Token;
 
