@@ -6,7 +6,6 @@ import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.SyntaxNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 
-import java.beans.Expression;
 
 public class Evaluator implements Visitor {
 
