@@ -28,7 +28,7 @@ public class CodeGenerator implements Visitor {
         node.setVariable(getVariableName(0));
         incrementCounter();
 
-        codeLines.add(node.getVariable() + " = " + node.getOperator() + getVariableName(1));
+        codeLines.add(node.getVariable() + " = " + node.getOperator() + getVariableName(2));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CodeGenerator implements Visitor {
         node.setVariable(getVariableName(0));
         incrementCounter();
 
-        codeLines.add(node.getVariable() + " = " + getVariableName(1) + " " + node.getOperator() + " " + getVariableName(2));
+        codeLines.add(node.getVariable() + " = " + getVariableName(3) + " " + node.getOperator() + " " + getVariableName(2));
     }
 
     private String getVariableName(int offSet){
