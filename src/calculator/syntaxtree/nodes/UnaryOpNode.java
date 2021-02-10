@@ -22,4 +22,9 @@ public class UnaryOpNode extends SyntaxNode implements Visitable {
     public String getOperator() {
         return operator;
     }
+
+    @Override
+    public Integer getValue() {
+        return super.getValue();
+    }
 }

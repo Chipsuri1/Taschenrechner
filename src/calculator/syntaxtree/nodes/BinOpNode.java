@@ -23,4 +23,24 @@ public class BinOpNode extends SyntaxNode implements Visitable {
     public String getOperator() {
         return operator;
     }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public Visitable getLeft() {
+        return left;
+    }
+
+    public void setLeft(Visitable left) {
+        this.left = left;
+    }
+
+    public Visitable getRight() {
+        return right;
+    }
+
+    public void setRight(Visitable right) {
+        this.right = right;
+    }
 }

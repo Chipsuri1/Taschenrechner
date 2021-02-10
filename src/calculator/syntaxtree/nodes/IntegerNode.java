@@ -13,4 +13,9 @@ public class IntegerNode extends SyntaxNode implements Visitable {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
+    @Override
+    public Integer getValue() {
+        return super.getValue();
+    }
 }

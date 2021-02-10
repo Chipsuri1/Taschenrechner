@@ -5,6 +5,7 @@ import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 
 public class DepthFirstIterator {
+
     public static void traverse(Visitable root, Visitor visitor) {
         if (root instanceof IntegerNode) {
             root.accept(visitor);
