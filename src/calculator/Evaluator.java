@@ -3,9 +3,13 @@ package calculator;
 import calculator.syntaxtree.Visitor;
 import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
+import calculator.syntaxtree.nodes.SyntaxNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 
+import java.beans.Expression;
+
 public class Evaluator implements Visitor {
+
     @Override
     public void visit(IntegerNode node) {
         //Falls der aktuelle Syntaxknoten ein Integer-Knoten (d.h. ein Blattknoten) ist tue nichts (, da bereits beim Anlegen des Integer-Knotens der aktuelle Zahlenwert gespeichert wird)
@@ -14,11 +18,32 @@ public class Evaluator implements Visitor {
     @Override
     public void visit(BinOpNode node) {
         //Falls der aktuelle Syntaxknoten ein binärer Operator-Knoten ist◦speichere n op m im aktuellen Syntaxknoten, wobei n der Wert des linken direkten Kindknotens ist und m der Wert des rechten direkten Kindknotens
+
+        SyntaxNode leftIntegerNode = (SyntaxNode) node.getLeft();
+        SyntaxNode rightIntegerNode = (SyntaxNode) node.getRight();
+        switch (node.getOperator()) {
+            case "+":
+                node.setValue(leftIntegerNode.getValue() + rightIntegerNode.getValue());
+                break;
+            case "-":
+                node.setValue(leftIntegerNode.getValue() - rightIntegerNode.getValue());
+                break;
+            case "*":
+                node.setValue(leftIntegerNode.getValue() * rightIntegerNode.getValue());
+                break;
+            case "/":
+                node.setValue(leftIntegerNode.getValue() / rightIntegerNode.getValue());
+                break;
+            case "^":
+                node.setValue((int) Math.pow(leftIntegerNode.getValue(), rightIntegerNode.getValue()));
+                break;
+        }
     }
 
     @Override
     public void visit(UnaryOpNode node) {
         //Falls der aktuelle Syntaxknoten ein unärer Operator-Knoten ist speichere -n im aktuellen Syntaxknoten, wobei n diejenige Zahl ist, die im direkten Kindknoten abgespeichert ist
-
+        SyntaxNode subNode = (SyntaxNode) node.subNode;
+            node.setValue(-subNode.getValue());
     }
 }
