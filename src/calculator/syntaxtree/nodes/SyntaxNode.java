@@ -5,7 +5,6 @@ public abstract class SyntaxNode {
     public Integer value;
     public String variable;
 
-
     public Integer getValue() {
         return value;
     }
