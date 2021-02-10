@@ -13,11 +13,12 @@ public class Evaluator implements Visitor {
 
     @Override
     public void visit(BinOpNode node) {
-        //Falls der aktuelle Syntaxknoten ein unärer Operator-Knoten ist speichere -n im aktuellen Syntaxknoten, wobei n diejenige Zahl ist, die im direkten Kindknoten abgespeichert ist
+        //Falls der aktuelle Syntaxknoten ein binärer Operator-Knoten ist◦speichere n op m im aktuellen Syntaxknoten, wobei n der Wert des linken direkten Kindknotens ist und m der Wert des rechten direkten Kindknotens
     }
 
     @Override
     public void visit(UnaryOpNode node) {
-        //Falls der aktuelle Syntaxknoten ein binärer Operator-Knoten ist◦speichere n op m im aktuellen Syntaxknoten, wobei n der Wert des linken direkten Kindknotens ist und m der Wert des rechten direkten Kindknotens
+        //Falls der aktuelle Syntaxknoten ein unärer Operator-Knoten ist speichere -n im aktuellen Syntaxknoten, wobei n diejenige Zahl ist, die im direkten Kindknoten abgespeichert ist
+
     }
 }
