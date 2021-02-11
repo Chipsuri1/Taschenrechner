@@ -8,6 +8,7 @@ import calculator.syntaxtree.nodes.UnaryOpNode;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +26,8 @@ public class CodeGeneratorTest {
 
         CodeGenerator generator = new CodeGenerator();
         DepthFirstIterator.traverse(syntaxTree, generator);
+        System.out.println(Arrays.toString(expectedCode.toArray()));
+        System.out.println(Arrays.toString(generator.getCodeLines().toArray()));
         assertEquals(expectedCode, generator.getCodeLines());
     }
 

@@ -5,6 +5,7 @@ package calculator;
 import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.Visitor;
+import calculator.syntaxtree.nodes.SyntaxNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class CodeGenerator implements Visitor {
 
     @Override
     public void visit(IntegerNode node){
-        node.setVariable(getVariableName(0));
+        node.setVariable(getVariableName());
         incrementCounter();
 
         codeLines.add(node.getVariable() + " = " + node.getValue());
@@ -25,22 +26,27 @@ public class CodeGenerator implements Visitor {
 
     @Override
     public void visit(UnaryOpNode node){
-        node.setVariable(getVariableName(0));
+        node.setVariable(getVariableName());
         incrementCounter();
 
-        codeLines.add(node.getVariable() + " = " + node.getOperator() + getVariableName(2));
+        SyntaxNode subNode = (SyntaxNode) node.getSubNode();
+
+        codeLines.add(node.getVariable() + " = " + node.getOperator() + subNode.getVariable());
     }
 
     @Override
     public void visit(BinOpNode node){
-        node.setVariable(getVariableName(0));
+        node.setVariable(getVariableName());
         incrementCounter();
 
-        codeLines.add(node.getVariable() + " = " + getVariableName(3) + " " + node.getOperator() + " " + getVariableName(2));
+        IntegerNode leftIntegerNode = (IntegerNode)node.getLeft();
+        IntegerNode rightIntegerNode = (IntegerNode)node.getRight();
+
+        codeLines.add(node.getVariable() + " = " + leftIntegerNode.getVariable() + " " + node.getOperator() + " " + rightIntegerNode.getVariable());
     }
 
-    private String getVariableName(int offSet){
-        return "X" + (counter-offSet);
+    private String getVariableName(){
+        return "X" + counter;
     }
 
     private void incrementCounter(){
