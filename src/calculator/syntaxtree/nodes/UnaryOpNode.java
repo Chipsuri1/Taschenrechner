@@ -13,7 +13,6 @@ public class UnaryOpNode extends SyntaxNode implements Visitable {
         this.subNode = subNode;
     }
 
-
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
