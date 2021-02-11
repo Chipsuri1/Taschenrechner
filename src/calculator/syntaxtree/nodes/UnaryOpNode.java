@@ -27,4 +27,8 @@ public class UnaryOpNode extends SyntaxNode implements Visitable {
     public Integer getValue() {
         return super.getValue();
     }
+
+    public Visitable getSubNode() {
+        return subNode;
+    }
 }
