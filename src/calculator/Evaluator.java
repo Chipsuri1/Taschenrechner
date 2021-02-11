@@ -36,6 +36,8 @@ public class Evaluator implements Visitor {
             case "^":
                 node.setValue((int) Math.pow(leftIntegerNode.getValue(), rightIntegerNode.getValue()));
                 break;
+            default:
+                throw new RuntimeException(("BinOpNode - forbidden Operator: " + node.operator));
         }
     }
 
@@ -43,6 +45,13 @@ public class Evaluator implements Visitor {
     public void visit(UnaryOpNode node) {
         //Falls der aktuelle Syntaxknoten ein unärer Operator-Knoten ist speichere -n im aktuellen Syntaxknoten, wobei n diejenige Zahl ist, die im direkten Kindknoten abgespeichert ist
         SyntaxNode subNode = (SyntaxNode) node.subNode;
-            node.setValue(-subNode.getValue());
+
+        switch (node.getOperator()) {
+            case "-":
+                node.setValue(-subNode.getValue());
+                break;
+            default:
+                throw new RuntimeException(("UnaryOpNode - forbidden Operator: " + node.operator));
+        }
     }
 }
