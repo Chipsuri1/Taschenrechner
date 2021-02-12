@@ -30,6 +30,10 @@ public class Scanner {
         if (Character.isDigit(arithmeticExpression.toCharArray()[peek])) {
             long value = (long) Character.getNumericValue(arithmeticExpression.toCharArray()[peek]);
             int loopCounter = 1;
+            if(peek + loopCounter >= arithmeticExpression.length()){
+                peek += loopCounter;
+                return new IntegerToken((int) value);
+            }
             while (Character.isDigit(arithmeticExpression.toCharArray()[peek + loopCounter])) {
                 value *= (long) 10;
                 value += (long) Character.getNumericValue(arithmeticExpression.toCharArray()[peek + loopCounter]);
