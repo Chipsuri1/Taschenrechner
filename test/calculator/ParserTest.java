@@ -15,27 +15,69 @@ public class ParserTest {
         String arithmeticExpression = "(4 + 5) * 7";
         Scanner scanner = new Scanner(arithmeticExpression);
         Parser parser = new Parser(scanner);
-        Visitable expectedTree = null;
-        Visitable generatedTree = null;
-        assert(equals(expectedTree, generatedTree));
-    }
-    @Test
-    public void testExpression()
-    {
-        Scanner scanner = new Scanner("5 - 3");
-        Parser parser = new Parser(scanner);
-        Visitable generatedTree = parser.expr(new BinOpNode("",null,null));
-        Visitable exspectedTree = new BinOpNode("-",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
-        System.out.println(((BinOpNode)generatedTree).operator);
-        System.out.println(((BinOpNode)generatedTree).left);
-        System.out.println(((BinOpNode)generatedTree).right);
+        Visitable expectedTree = new BinOpNode("*",new BinOpNode("+",new IntegerNode(4),new IntegerNode(5)),new IntegerNode(7));
+        Visitable generatedTree = parser.start();
+        Assertions.assertTrue(equals(expectedTree, generatedTree));
     }
 
     @Test
     public void testFailure()
     {
+        String arithmeticExpression = "(4 + 5) /* 7";
+        Scanner scanner = new Scanner(arithmeticExpression);
+        Parser parser = new Parser(scanner);
+        Assertions.assertThrows(RuntimeException.class, parser::start);
 
+    }
+
+    @Test
+    public void testExpressionPlus()
+    {
+        Scanner scanner = new Scanner("5 + 3");
+        Parser parser = new Parser(scanner);
+        Visitable generatedTree = parser.start();
+        Visitable exspectedTree = new BinOpNode("+",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+    }
+
+    @Test
+    public void testExpressionMinus()
+    {
+        Scanner scanner = new Scanner("5 - 3");
+        Parser parser = new Parser(scanner);
+        Visitable generatedTree = parser.start();
+        Visitable exspectedTree = new BinOpNode("-",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+    }
+
+    @Test
+    public void testExpressionDivide()
+    {
+        Scanner scanner = new Scanner("5 / 3");
+        Parser parser = new Parser(scanner);
+        Visitable generatedTree = parser.start();
+        Visitable exspectedTree = new BinOpNode("/",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+    }
+
+    @Test
+    public void testExpressionTimes()
+    {
+        Scanner scanner = new Scanner("5 * 3");
+        Parser parser = new Parser(scanner);
+        Visitable generatedTree = parser.start();
+        Visitable exspectedTree = new BinOpNode("*",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+    }
+
+    @Test
+    public void testExpressionPower()
+    {
+        Scanner scanner = new Scanner("5 ^ 3");
+        Parser parser = new Parser(scanner);
+        Visitable generatedTree = parser.start();
+        Visitable exspectedTree = new BinOpNode("^",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,exspectedTree));
     }
 
     private static boolean equals(Visitable v1, Visitable v2)
