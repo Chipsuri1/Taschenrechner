@@ -4,11 +4,28 @@ import calculator.syntaxtree.Visitable;
 import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
+import calculator.tokens.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+
 public class ParserTest {
 
+    //standalone test
+    @Test
+    public void testSuccessMock()
+    {
+        String arithmeticExpression = "(4 + 5) * 7";
+        ScannerMock mock = new ScannerMock(arithmeticExpression);
+        mock.prepareForTest(getListForSuccessMock());
+        Parser parser = new Parser(mock);
+        Visitable expectedTree = new BinOpNode("*",new BinOpNode("+",new IntegerNode(4),new IntegerNode(5)),new IntegerNode(7));
+        Visitable generatedTree = parser.start();
+        Assertions.assertTrue(equals(expectedTree, generatedTree));
+    }
+
+    // test in combination with scanner
     @Test
     public void testSuccess()
     {
@@ -20,6 +37,18 @@ public class ParserTest {
         Assertions.assertTrue(equals(expectedTree, generatedTree));
     }
 
+    // standalone test
+    @Test
+    public void testFailureMock()
+    {
+        String arithmeticExpression = "(4 + 5) /* 7";
+        ScannerMock mock = new ScannerMock(arithmeticExpression);
+        mock.prepareForTest(getListForFailureMock());
+        Parser parser = new Parser(mock);
+        Assertions.assertThrows(RuntimeException.class, parser::start);
+    }
+
+    // test in combination with scanner
     @Test
     public void testFailure()
     {
@@ -27,17 +56,18 @@ public class ParserTest {
         Scanner scanner = new Scanner(arithmeticExpression);
         Parser parser = new Parser(scanner);
         Assertions.assertThrows(RuntimeException.class, parser::start);
-
     }
 
+
+    // tests of the basic functions
     @Test
     public void testExpressionPlus()
     {
         Scanner scanner = new Scanner("5 + 3");
         Parser parser = new Parser(scanner);
         Visitable generatedTree = parser.start();
-        Visitable exspectedTree = new BinOpNode("+",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+        Visitable expectedTree = new BinOpNode("+",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,expectedTree));
     }
 
     @Test
@@ -46,8 +76,8 @@ public class ParserTest {
         Scanner scanner = new Scanner("5 - 3");
         Parser parser = new Parser(scanner);
         Visitable generatedTree = parser.start();
-        Visitable exspectedTree = new BinOpNode("-",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+        Visitable expectedTree = new BinOpNode("-",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,expectedTree));
     }
 
     @Test
@@ -56,8 +86,8 @@ public class ParserTest {
         Scanner scanner = new Scanner("5 / 3");
         Parser parser = new Parser(scanner);
         Visitable generatedTree = parser.start();
-        Visitable exspectedTree = new BinOpNode("/",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+        Visitable expectedTree = new BinOpNode("/",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,expectedTree));
     }
 
     @Test
@@ -66,8 +96,8 @@ public class ParserTest {
         Scanner scanner = new Scanner("5 * 3");
         Parser parser = new Parser(scanner);
         Visitable generatedTree = parser.start();
-        Visitable exspectedTree = new BinOpNode("*",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+        Visitable expectedTree = new BinOpNode("*",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,expectedTree));
     }
 
     @Test
@@ -76,10 +106,11 @@ public class ParserTest {
         Scanner scanner = new Scanner("5 ^ 3");
         Parser parser = new Parser(scanner);
         Visitable generatedTree = parser.start();
-        Visitable exspectedTree = new BinOpNode("^",new IntegerNode(5),new IntegerNode(3));
-        Assertions.assertTrue(equals(generatedTree,exspectedTree));
+        Visitable expectedTree = new BinOpNode("^",new IntegerNode(5),new IntegerNode(3));
+        Assertions.assertTrue(equals(generatedTree,expectedTree));
     }
 
+    // method to compare two syntax trees
     private static boolean equals(Visitable v1, Visitable v2)
     {
         if (v1 == v2)
@@ -112,5 +143,34 @@ public class ParserTest {
                     equals(op1.right, op2.right);
         }
         throw new IllegalStateException("Ungueltiger Knotentyp");
+    }
+
+    // methods to generate the simulated tokenlists
+    public ArrayList<Token> getListForSuccessMock(){
+        ArrayList<Token> tokenList = new ArrayList<Token>();
+        tokenList.add(new SeparatorToken('('));
+        tokenList.add(new IntegerToken(4));
+        tokenList.add(new OperatorToken('+'));
+        tokenList.add(new IntegerToken(5));
+        tokenList.add(new SeparatorToken(')'));
+        tokenList.add(new OperatorToken('*'));
+        tokenList.add(new IntegerToken(7));
+        tokenList.add(new EndOfStreamToken());
+
+        return tokenList;
+    }
+    public ArrayList<Token> getListForFailureMock(){
+        ArrayList<Token> tokenList = new ArrayList<Token>();
+        tokenList.add(new SeparatorToken('('));
+        tokenList.add(new IntegerToken(4));
+        tokenList.add(new OperatorToken('+'));
+        tokenList.add(new IntegerToken(5));
+        tokenList.add(new SeparatorToken(')'));
+        tokenList.add(new OperatorToken('/'));
+        tokenList.add(new OperatorToken('*'));
+        tokenList.add(new IntegerToken(7));
+        tokenList.add(new EndOfStreamToken());
+
+        return tokenList;
     }
 }

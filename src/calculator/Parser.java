@@ -32,65 +32,65 @@ public class Parser {
             Visitable syntaxTree = rest_expr(term(null));
             return syntaxTree;
         }
-        throw new RuntimeException("Syntax error expr !");
+        throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable rest_expr(Visitable parameter)
+    private Visitable rest_expr(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if (tag == Tag.PLUS) {
             match(Tag.PLUS);
             Visitable subTree = term(null);
-            Visitable root = new BinOpNode("+",parameter, subTree);
+            Visitable root = new BinOpNode("+",syntaxTree, subTree);
             return rest_expr(root);
         }
         else if(tag == Tag.MINUS){
             match(Tag.MINUS);
             Visitable subTree = term(null);
-            Visitable root = new BinOpNode("-", parameter, subTree);
+            Visitable root = new BinOpNode("-", syntaxTree, subTree);
             return rest_expr(root);
         }
         else if(tag== Tag.CLOSING_BRACKET){
-            return parameter;
+            return syntaxTree;
         }
         else if(tag == Tag.END_OF_STREAM){
-            return parameter;
+            return syntaxTree;
         }
-        else throw new RuntimeException("Syntax error rest_expr!");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable term(Visitable subTree)
+    private Visitable term(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if (tag == Tag.INTEGER || tag == Tag.MINUS || tag == Tag.OPENING_BRACKET) {
-            Visitable parameter = rest_term(factor(null));
-            return parameter;
+            Visitable subTree = rest_term(factor(null));
+            return subTree;
         }
-        else throw new RuntimeException("Syntax error term !");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable rest_term(Visitable parameter)
+    private Visitable rest_term(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.TIMES){
             match(Tag.TIMES);
             Visitable subTree = factor(null);
-            Visitable root = new BinOpNode("*", parameter, subTree);
+            Visitable root = new BinOpNode("*", syntaxTree, subTree);
             return rest_term(root);
         }
         else if(tag == Tag.DIVIDE){
             match(Tag.DIVIDE);
             Visitable subTree = factor(null);
-            Visitable root = new BinOpNode("/", parameter, subTree);
+            Visitable root = new BinOpNode("/", syntaxTree, subTree);
             return rest_term(root);
         }
         else if(tag == Tag.PLUS || tag == Tag.MINUS || tag == Tag.CLOSING_BRACKET || tag == Tag.END_OF_STREAM){
-            return parameter;
+            return syntaxTree;
         }
-        else throw new RuntimeException("Syntax error rest_term!");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable factor(Visitable parameter)
+    private Visitable factor(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.INTEGER || tag == Tag.OPENING_BRACKET){
@@ -102,37 +102,37 @@ public class Parser {
             Visitable root = new UnaryOpNode("-",subTree);
             return root;
         }
-        else throw new RuntimeException("Syntax error factor!");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable pot(Visitable parameter)
+    private Visitable pot(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.INTEGER || tag == Tag.OPENING_BRACKET){
             return rest_pot(base(null));
         }
-        else throw new RuntimeException("Syntax error pot!");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable rest_pot(Visitable parameter)
+    private Visitable rest_pot(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.POWER){
             match(Tag.POWER);
             Visitable subTree = ex(null);
-            Visitable root = new BinOpNode("^",parameter,subTree);
+            Visitable root = new BinOpNode("^",syntaxTree,subTree);
             return rest_pot(root);
         }
         else if(tag == Tag.PLUS || tag == Tag.MINUS || tag == Tag.TIMES || tag == Tag.DIVIDE || tag == Tag.CLOSING_BRACKET){
-            return parameter;
+            return syntaxTree;
         }
         else if(tag == Tag.END_OF_STREAM){
-            return parameter;
+            return syntaxTree;
         }
-        else throw new RuntimeException("Syntax error rest_pot!");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable base( Visitable parameter)
+    private Visitable base( Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.OPENING_BRACKET)
@@ -150,10 +150,10 @@ public class Parser {
             Visitable integerNode = new IntegerNode(value);
             return integerNode;
         }
-        else throw new RuntimeException("Syntax error base !");
+        else throw new RuntimeException("Syntax error!");
     }
 
-    private Visitable ex(Visitable parameter)
+    private Visitable ex(Visitable syntaxTree)
     {
         Tag tag = lookahead.getTag();
         if(tag == Tag.INTEGER){
@@ -176,7 +176,7 @@ public class Parser {
 
             return expression;
         }
-        else throw new RuntimeException("Syntax error ex!");
+        else throw new RuntimeException("Syntax error!");
     }
 
     private void match(Tag tag)
@@ -186,7 +186,7 @@ public class Parser {
             this.lookahead = this.scanner.getNextToken();
             return;
         }
-        throw new RuntimeException("Syntax error match!");
+        throw new RuntimeException("Syntax error!");
     }
 
 }
