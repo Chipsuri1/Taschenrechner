@@ -9,14 +9,13 @@ import calculator.syntaxtree.nodes.SyntaxNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EvaluatorTest {
     Visitable hardCodedSyntaxTree;
 
     @Test
-    public void testEvaluation() {
+    public void testEvaluationRightExpected() {
         generateSyntaxTree();
         int expectedResult = -1;// expected result of evaluation
         int actualResult;
@@ -26,6 +25,19 @@ public class EvaluatorTest {
         actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
 
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationWrongExpected() {
+        generateSyntaxTree();
+        int notExpectedResult = -2;// not expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertNotEquals(notExpectedResult, actualResult);
     }
 
     private Visitable generateSyntaxTree() {
