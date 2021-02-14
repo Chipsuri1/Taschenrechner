@@ -5,8 +5,8 @@ import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
 import calculator.tokens.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -145,7 +145,7 @@ public class ParserTest {
         throw new IllegalStateException("Ungueltiger Knotentyp");
     }
 
-    // methods to generate the simulated tokenlists
+    // methods to generate the simulated tokenLists
     public ArrayList<Token> getListForSuccessMock(){
         ArrayList<Token> tokenList = new ArrayList<Token>();
         tokenList.add(new SeparatorToken('('));
@@ -159,6 +159,7 @@ public class ParserTest {
 
         return tokenList;
     }
+
     public ArrayList<Token> getListForFailureMock(){
         ArrayList<Token> tokenList = new ArrayList<Token>();
         tokenList.add(new SeparatorToken('('));
