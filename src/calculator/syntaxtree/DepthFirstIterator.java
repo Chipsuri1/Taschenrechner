@@ -59,7 +59,6 @@ public class DepthFirstIterator {
                     equals(op1.left, op2.left) &&
                     equals(op1.right, op2.right);
         }
-        throw new IllegalStateException("Ungueltiger Knotentyp");
+        throw new IllegalStateException("Invalid Nodetype");
     }
-
 }

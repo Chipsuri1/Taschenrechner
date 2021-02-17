@@ -18,6 +18,7 @@ public class ScannerMock extends Scanner{
     public void prepareForTest(ArrayList<Token> tokenList){
         this.tokenList = tokenList;
     }
+
     @Override
     public Token getNextToken(){
         if(index >= tokenList.size())
