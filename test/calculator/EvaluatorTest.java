@@ -2,7 +2,6 @@ package calculator;
 
 import calculator.syntaxtree.DepthFirstIterator;
 import calculator.syntaxtree.Visitable;
-import calculator.syntaxtree.Visitor;
 import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.SyntaxNode;
@@ -118,9 +117,7 @@ public class EvaluatorTest {
         hardCodedSyntaxTree = new BinOpNode("a", new IntegerNode(10), new IntegerNode(3));
 
         Evaluator evaluator = new Evaluator();
-        Assertions.assertThrows(RuntimeException.class, ()->{
-            DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
-        });
+        Assertions.assertThrows(RuntimeException.class, ()-> DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator));
 
     }
 }
