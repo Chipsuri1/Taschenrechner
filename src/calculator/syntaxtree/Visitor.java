@@ -9,5 +9,4 @@ public interface Visitor {
     public void visit(IntegerNode node);
     public void visit(BinOpNode node);
     public void visit(UnaryOpNode node);
-
 }

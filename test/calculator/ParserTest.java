@@ -147,7 +147,7 @@ public class ParserTest {
 
     // methods to generate the simulated tokenLists
     public ArrayList<Token> getListForSuccessMock(){
-        ArrayList<Token> tokenList = new ArrayList<Token>();
+        ArrayList<Token> tokenList = new ArrayList<>();
         tokenList.add(new SeparatorToken('('));
         tokenList.add(new IntegerToken(4));
         tokenList.add(new OperatorToken('+'));
@@ -161,7 +161,7 @@ public class ParserTest {
     }
 
     public ArrayList<Token> getListForFailureMock(){
-        ArrayList<Token> tokenList = new ArrayList<Token>();
+        ArrayList<Token> tokenList = new ArrayList<>();
         tokenList.add(new SeparatorToken('('));
         tokenList.add(new IntegerToken(4));
         tokenList.add(new OperatorToken('+'));

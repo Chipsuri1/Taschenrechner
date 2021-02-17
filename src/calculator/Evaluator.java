@@ -37,9 +37,10 @@ public class Evaluator implements Visitor {
         //if unaryOpNode setValue (-n) n: Value of subNode
         if (node.subNode instanceof SyntaxNode) {
             SyntaxNode subNode = (SyntaxNode) node.subNode;
-            switch (node.getOperator()) {
-                case "-" -> node.setValue(-subNode.getValue());
-                default -> throw new RuntimeException(("UnaryOpNode - forbidden Operator: " + node.operator));
+            if ("-".equals(node.getOperator())) {
+                node.setValue(-subNode.getValue());
+            } else {
+                throw new RuntimeException(("UnaryOpNode - forbidden Operator: " + node.operator));
             }
         } else {
             throw new RuntimeException("Error - Node cannot be cast to UnaryOpNode!");

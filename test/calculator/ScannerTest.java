@@ -102,7 +102,7 @@ public class ScannerTest {
     }
 
     private ArrayList<Token> getList(){
-        ArrayList<Token> list = new ArrayList<Token>();
+        ArrayList<Token> list = new ArrayList<>();
         list.add(new SeparatorToken('('));
         list.add(new IntegerToken(5));
         list.add(new OperatorToken('+'));

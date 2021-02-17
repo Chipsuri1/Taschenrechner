@@ -8,7 +8,6 @@ import calculator.syntaxtree.nodes.UnaryOpNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class CodeGeneratorTest {
     public void testCodeGeneratorSuccess() {
         Visitable validSyntaxTree = generateValidSyntaxTree();
 
-        List<String> expectedCode = new ArrayList<String>();
+        List<String> expectedCode = new ArrayList<>();
         expectedCode.add("X1 = 44");
         expectedCode.add("X2 = 5");
         expectedCode.add("X3 = X1 + X2");
@@ -42,7 +41,7 @@ public class CodeGeneratorTest {
     public void testCodeGeneratorFail() {
         Visitable invalidSyntaxTree = generateInvalidSyntaxTree();
 
-        List<String> expectedCode = new ArrayList<String>();
+        List<String> expectedCode = new ArrayList<>();
         expectedCode.add("X1 = 44");
         expectedCode.add("X2 = 5");
         expectedCode.add("X3 = X1 + X2");

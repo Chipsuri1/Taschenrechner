@@ -6,14 +6,13 @@ public class OperatorToken extends Token
 
     public OperatorToken(char operator)
     {
-        switch (operator)
-        {
-            case '+': this.tag = Tag.PLUS; break;
-            case '-': this.tag = Tag.MINUS; break;
-            case '*': this.tag = Tag.TIMES; break;
-            case '/': this.tag = Tag.DIVIDE; break;
-            case '^': this.tag = Tag.POWER; break;
-            default: throw new RuntimeException("Syntax error!");
+        switch (operator) {
+            case '+' -> this.tag = Tag.PLUS;
+            case '-' -> this.tag = Tag.MINUS;
+            case '*' -> this.tag = Tag.TIMES;
+            case '/' -> this.tag = Tag.DIVIDE;
+            case '^' -> this.tag = Tag.POWER;
+            default -> throw new RuntimeException("Syntax error!");
         }
         this.operator = operator;
     }

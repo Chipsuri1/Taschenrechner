@@ -41,12 +41,6 @@ public class EvaluatorTest {
         assertNotEquals(notExpectedResult, actualResult);
     }
 
-    private void generateSyntaxTree() {
-        hardCodedSyntaxTree = new UnaryOpNode("-", (new BinOpNode("/", new IntegerNode(55), new BinOpNode("+", new IntegerNode(44), new IntegerNode(5)))));
-    }
-
-
-
     @Test
     public void testEvaluationAddition(){
         hardCodedSyntaxTree = new BinOpNode("+", new IntegerNode(10), new IntegerNode(20));
@@ -113,11 +107,14 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testEvaluationException(){
+    public void testEvaluationException() {
         hardCodedSyntaxTree = new BinOpNode("a", new IntegerNode(10), new IntegerNode(3));
 
         Evaluator evaluator = new Evaluator();
-        Assertions.assertThrows(RuntimeException.class, ()-> DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator));
+        Assertions.assertThrows(RuntimeException.class, () -> DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator));
+    }
 
+    private void generateSyntaxTree() {
+        hardCodedSyntaxTree = new UnaryOpNode("-", (new BinOpNode("/", new IntegerNode(55), new BinOpNode("+", new IntegerNode(44), new IntegerNode(5)))));
     }
 }
