@@ -1,7 +1,5 @@
 package calculator;
 
-
-
 import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.Visitor;

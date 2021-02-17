@@ -1,6 +1,5 @@
 package calculator;
 
-
 import calculator.tokens.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ public class ScannerTest {
         }catch (Exception exception){
             Assertions.assertEquals(RuntimeException.class, exception.getClass());
         }
-
     }
 
     @Test
@@ -123,5 +121,4 @@ public class ScannerTest {
         list.add(new EndOfStreamToken());
         return list;
     }
-
 }

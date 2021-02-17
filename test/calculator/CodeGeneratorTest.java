@@ -62,5 +62,4 @@ public class CodeGeneratorTest {
         Visitable syntaxTreeInvalid = new UnaryOpNode("-", new BinOpNode("-", new IntegerNode(44), new IntegerNode(5)));
         return syntaxTreeInvalid;
     }
-
 }

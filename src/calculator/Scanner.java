@@ -3,6 +3,7 @@ package calculator;
 import calculator.tokens.*;
 
 public class Scanner {
+
     private final String arithmeticExpression;
     private int peek;
 

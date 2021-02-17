@@ -9,6 +9,7 @@ import calculator.tokens.Tag;
 import calculator.tokens.Token;
 
 public class Parser {
+
     private final Scanner scanner;
     private Token lookahead;
 
