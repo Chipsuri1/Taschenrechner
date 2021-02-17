@@ -7,6 +7,7 @@ import calculator.syntaxtree.nodes.BinOpNode;
 import calculator.syntaxtree.nodes.IntegerNode;
 import calculator.syntaxtree.nodes.SyntaxNode;
 import calculator.syntaxtree.nodes.UnaryOpNode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,8 +41,85 @@ public class EvaluatorTest {
         assertNotEquals(notExpectedResult, actualResult);
     }
 
-    private Visitable generateSyntaxTree() {
+    private void generateSyntaxTree() {
         hardCodedSyntaxTree = new UnaryOpNode("-", (new BinOpNode("/", new IntegerNode(55), new BinOpNode("+", new IntegerNode(44), new IntegerNode(5)))));
-        return hardCodedSyntaxTree;
+    }
+
+
+
+    @Test
+    public void testEvaluationAddition(){
+        hardCodedSyntaxTree = new BinOpNode("+", new IntegerNode(10), new IntegerNode(20));
+        int expectedResult = 30;// expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationSubtraction(){
+        hardCodedSyntaxTree = new BinOpNode("-", new IntegerNode(10), new IntegerNode(20));
+        int expectedResult = -10;// expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationMultiplication(){
+        hardCodedSyntaxTree = new BinOpNode("*", new IntegerNode(10), new IntegerNode(20));
+        int expectedResult = 200;// expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationDivision(){
+        hardCodedSyntaxTree = new BinOpNode("/", new IntegerNode(10), new IntegerNode(20));
+        int expectedResult = 0;// expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationPower(){
+        hardCodedSyntaxTree = new BinOpNode("^", new IntegerNode(10), new IntegerNode(3));
+        int expectedResult = 1000;// expected result of evaluation
+        int actualResult;
+
+        Evaluator evaluator = new Evaluator();
+        DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        actualResult = ((SyntaxNode) hardCodedSyntaxTree).getValue();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testEvaluationException(){
+        hardCodedSyntaxTree = new BinOpNode("a", new IntegerNode(10), new IntegerNode(3));
+
+        Evaluator evaluator = new Evaluator();
+        Assertions.assertThrows(RuntimeException.class, ()->{
+            DepthFirstIterator.traverse(hardCodedSyntaxTree, evaluator);
+        });
+
     }
 }

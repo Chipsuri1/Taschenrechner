@@ -11,12 +11,12 @@ public class Evaluator implements Visitor {
 
     @Override
     public void visit(IntegerNode node) {
-        //Falls der aktuelle Syntaxknoten ein Integer-Knoten (d.h. ein Blattknoten) ist tue nichts (, da bereits beim Anlegen des Integer-Knotens der aktuelle Zahlenwert gespeichert wird)
+        //If integerNode then do nothing
     }
 
     @Override
     public void visit(BinOpNode node) {
-        //Falls der aktuelle Syntaxknoten ein binärer Operator-Knoten ist◦speichere n op m im aktuellen Syntaxknoten, wobei n der Wert des linken direkten Kindknotens ist und m der Wert des rechten direkten Kindknotens
+        //if BinOpNode setValue (n op m): n: Value of left node, m: Value of right node, op: Operator of BinOpNode
         if (node.getRight() instanceof SyntaxNode && node.getLeft() instanceof SyntaxNode) {
             SyntaxNode leftIntegerNode = (SyntaxNode) node.getLeft();
             SyntaxNode rightIntegerNode = (SyntaxNode) node.getRight();
@@ -46,7 +46,7 @@ public class Evaluator implements Visitor {
 
     @Override
     public void visit(UnaryOpNode node) {
-        //Falls der aktuelle Syntaxknoten ein unärer Operator-Knoten ist speichere -n im aktuellen Syntaxknoten, wobei n diejenige Zahl ist, die im direkten Kindknoten abgespeichert ist
+        //if unaryOpNode setValue (-n) n: Value of subNode
         if (node.subNode instanceof SyntaxNode) {
             SyntaxNode subNode = (SyntaxNode) node.subNode;
             switch (node.getOperator()) {
